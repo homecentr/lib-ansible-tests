@@ -1,0 +1,89 @@
+plugins{
+    id 'com.jfrog.bintray' version '1.8.5'
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+    id 'maven'
+}
+
+group = 'io.homecentr'
+
+sourceCompatibility = 1.8
+
+jar {
+    baseName = 'ansible-tests'
+}
+
+repositories{
+    mavenCentral()
+    jcenter()
+}
+
+dependencies{
+    implementation "org.testcontainers:testcontainers:1.14.3"
+
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
+
+    testCompile "org.mockito:mockito-core:3.3.3"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes){
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc){
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts{
+    archives sourcesJar
+    archives javadocJar
+}
+
+bintray{
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_API_KEY")
+    publications = ['TestContainersExtensions']
+    publish = true
+    
+    pkg{
+        repo = String.valueOf(System.getenv('BINTRAY_REPO')).toLowerCase()
+        userOrg = String.valueOf(System.getenv('BINTRAY_ORG')).toLowerCase()
+        name = 'ansible-tests'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/homecentr/ansible-tests.git'
+        websiteUrl = 'https://github.com/homecentr/ansible-tests'
+        issueTrackerUrl = 'https://github.com/homecentr/ansible-tests/issues'
+        publicDownloadNumbers = true
+
+        githubRepo = 'homecentr/ansible-tests'
+        githubReleaseNotesFile = 'README.md'
+
+        version {
+            name = String.valueOf(System.getenv("RELEASE_VERSION")).replace("v", "")
+            vcsTag = String.valueOf(System.getenv("GITHUB_SHA")).toLowerCase()
+            released = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+        TestContainersExtensions(MavenPublication){
+            from components.java
+            groupId group
+            artifactId 'ansible-tests'
+            version String.valueOf(System.getenv("RELEASE_VERSION")).replace("v", "")
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+test {
+    afterTest { desc, result ->
+        logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}

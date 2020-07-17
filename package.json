@@ -1,0 +1,15 @@
+{ 
+  "name": "ansible-tests",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homecentr/ansible-tests.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/homecentr/ansible-tests/issues"
+  },
+  "homepage": "https://github.com/homecentr/ansible-tests#readme"
+}
