@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Lukas Holota
+  description: your role description
+  company: Homecentr
+
+  issue_tracker_url: https://github.com/homecentr/ansible-role-$$ROLE_NAME$$/issues
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  galaxy_tags:
+    - centos8
+    - homecentr
+    
+dependencies: []

@@ -4,12 +4,12 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/homecentr/ansible-tests.git"
+    "url": "git+https://github.com/homecentr/lib-ansible-tests.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/homecentr/ansible-tests/issues"
+    "url": "https://github.com/homecentr/lib-ansible-tests/issues"
   },
-  "homepage": "https://github.com/homecentr/ansible-tests#readme"
+  "homepage": "https://github.com/homecentr/lib-ansible-tests#readme"
 }

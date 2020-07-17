@@ -1,0 +1,5 @@
+---
+- name: Apply defaults
+  set_fact:
+    person: "{{ person_defaults | combine(person, recursive=True) }}"
+  when: person is defined

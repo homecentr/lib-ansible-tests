@@ -17,10 +17,16 @@ jar {
 repositories{
     mavenCentral()
     jcenter()
+    maven {
+        url  "https://dl.bintray.com/homecentr/maven"
+    }
 }
 
 dependencies{
     implementation "org.testcontainers:testcontainers:1.14.3"
+    implementation 'io.homecentr:testcontainers-extensions:1.4.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.2'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13'
 
@@ -45,7 +51,7 @@ artifacts{
 bintray{
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_API_KEY")
-    publications = ['TestContainersExtensions']
+    publications = ['AnsibleTests']
     publish = true
     
     pkg{
@@ -53,12 +59,12 @@ bintray{
         userOrg = String.valueOf(System.getenv('BINTRAY_ORG')).toLowerCase()
         name = 'ansible-tests'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/homecentr/ansible-tests.git'
-        websiteUrl = 'https://github.com/homecentr/ansible-tests'
-        issueTrackerUrl = 'https://github.com/homecentr/ansible-tests/issues'
+        vcsUrl = 'https://github.com/homecentr/lib-ansible-tests.git'
+        websiteUrl = 'https://github.com/homecentr/lib-ansible-tests'
+        issueTrackerUrl = 'https://github.com/homecentr/lib-ansible-tests/issues'
         publicDownloadNumbers = true
 
-        githubRepo = 'homecentr/ansible-tests'
+        githubRepo = 'homecentr/lib-ansible-tests'
         githubReleaseNotesFile = 'README.md'
 
         version {
@@ -71,7 +77,7 @@ bintray{
 
 publishing {
     publications {
-        TestContainersExtensions(MavenPublication){
+        AnsibleTests(MavenPublication){
             from components.java
             groupId group
             artifactId 'ansible-tests'
