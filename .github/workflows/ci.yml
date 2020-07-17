@@ -16,8 +16,5 @@ jobs:
         with:
           java-version: 11
 
-      - name: Gradle - build
+      - name: Gradle - build & test
         run: gradle build
-
-      - name: Gradle - test
-        run: gradle test
