@@ -1,0 +1,21 @@
+- name: Verify all required variables have been provided
+  assert:
+    quiet: yes
+    fail_msg: "The variable {{ item }} is mandatory and must be defined."
+    that:
+      - "{{ item }} is defined"
+  with_items:
+    - person
+    - person.first_name
+    - person.last_name
+    - person.email
+    - person.phone_number
+
+- name: Verify phone number is in correct format
+  assert:
+    quiet: yes
+    fail_msg: "The variable {{ item }} must be a valid phone number (numbers only)."
+    that:
+      - "{{ item }} is match('^[0-9]+$')"
+  with_items:
+    - person.phone_number
