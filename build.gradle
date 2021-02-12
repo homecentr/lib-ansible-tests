@@ -23,7 +23,7 @@ repositories{
 }
 
 dependencies{
-    implementation "org.testcontainers:testcontainers:1.14.3"
+    implementation "org.testcontainers:testcontainers:1.15.2"
     implementation 'io.homecentr:testcontainers-extensions:1.4.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.2'
